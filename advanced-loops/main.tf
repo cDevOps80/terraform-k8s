@@ -49,3 +49,8 @@ resource "aws_instance" "good" {
     Name = "test-${each.key}"
   }
 }
+
+output "for_each" {
+  value = aws_instance.good
+
+}
