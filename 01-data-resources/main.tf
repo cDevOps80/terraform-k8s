@@ -14,6 +14,15 @@ output "data-key" {
   value = data.aws_key_pair.example.public_key
 }
 
+resource "aws_key_pair" "nigv2" {
+  public_key = data.aws_key_pair.example.public_key
+  name = "nigv2"
+
+  tags = {
+    Name = "chaitu"
+  }
+}
+
 #resource "aws_instance" "one" {
 #  ami  = "ami-0a5c3558529277641"
 #  instance_type = "t2.micro"
