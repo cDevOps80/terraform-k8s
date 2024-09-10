@@ -24,7 +24,7 @@ data "aws_ami_ids" "example" {
 
   filter {
     name   = "name"
-    values = ["RHEL-9-DevOps-Practice"]
+    values = ["RHEL-9-DevOps-Practice","Centos-8-DevOps-Practice"]
   }
 #    filter {
 #      name   = "architecture"
