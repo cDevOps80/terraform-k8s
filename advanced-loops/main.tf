@@ -51,6 +51,6 @@ resource "aws_instance" "good" {
 }
 
 output "for_each" {
-  value = aws_instance.good
+  value = { for key, value in aws_instance.good : key => value.tags.Name }
 
 }
