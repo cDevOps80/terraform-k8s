@@ -15,12 +15,16 @@ variable "instance_types" {
   }
 }
 
-output "final" {
-  value = aws_instance.good
-}
+#output "final" {
+#  value = aws_instance.good
+#}
 
 output "instance_publicdns2" {
   value = {
     for key, myec2vm in aws_instance.good : key => myec2vm.private_ip
   }
+}
+
+output "instance_publicdns" {
+  value = [ for key, values in aws_instance.good : values  ]
 }
