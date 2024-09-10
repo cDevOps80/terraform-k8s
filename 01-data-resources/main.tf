@@ -20,16 +20,16 @@ provider "aws" {
 
 data "aws_ami_ids" "example" {
 
-  owners      = ["amazon"]
+  owners      = ["RHEL-9-DevOps-Practice"]
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-kernel-5.10-hvm-2.*"]
+    values = ["RHEL-9-DevOps-Practice"]
   }
-    filter {
-      name   = "architecture"
-      values = ["arm64"]
-    }
+#    filter {
+#      name   = "architecture"
+#      values = ["arm64"]
+#    }
 
 }
 
