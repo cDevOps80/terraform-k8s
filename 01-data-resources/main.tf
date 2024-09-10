@@ -11,6 +11,11 @@ data "aws_ami" "example" {
       name   = "name"
       values = ["amzn2-ami-kernel-5.10-hvm-2.0.20240903.0-x86_64-gp2"]
     }
+
+  filter {
+    name   = "architecture"
+    values = ["arm64"]
+  }
 }
 
 output "amazon-linux-id" {
