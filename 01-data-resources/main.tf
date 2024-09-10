@@ -20,7 +20,7 @@ provider "aws" {
 
 data "aws_ami_ids" "example" {
 
-  owners      = ["RHEL-9-DevOps-Practice"]
+  owners      = ["973714476881"]
 
   filter {
     name   = "name"
