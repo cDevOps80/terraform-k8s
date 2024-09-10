@@ -31,5 +31,5 @@ data "aws_ami_ids" "example" {
 
 
 output "amazon-linux-id" {
-  value = data.aws_ami.example
+  value = data.aws_ami_ids.example
 }
