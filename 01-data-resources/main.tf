@@ -36,5 +36,5 @@ data "aws_ami_ids" "example" {
 
 
 output "amazon-linux-id" {
-  value = data.aws_ami_ids.example
+  value = { for  key, value in data.aws_ami_ids.example : key.filter.values => value.ids }
 }
