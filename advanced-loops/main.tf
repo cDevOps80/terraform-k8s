@@ -41,8 +41,9 @@ data "aws_availability_zones" "example" {
     name   = "opt-in-status"
     values = ["opt-in-not-required"]
   }
-
 }
 output "data" {
-  value = data.aws_availability_zones.example.names
+  # value = data.aws_availability_zones.example.names
+
+  value = [ for i in data.aws_availability_zones.example : i.names ]
 }
