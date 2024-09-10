@@ -3,6 +3,7 @@ data "aws_vpc" "default" {
 }
 
 data "aws_key_pair" "example" {
+  include_public_key = true
   filter {
     name   = "key-name"
     values = ["nvirginia"]
