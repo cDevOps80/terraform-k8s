@@ -26,10 +26,10 @@ data "aws_ami_ids" "example" {
     name   = "name"
     values = ["amzn2-ami-kernel-5.10-hvm-2.*"]
   }
-#    filter {
-#      name   = "architecture"
-#      values = ["arm64"]
-#    }
+    filter {
+      name   = "architecture"
+      values = ["arm64"]
+    }
 }
 
 output "final" {
