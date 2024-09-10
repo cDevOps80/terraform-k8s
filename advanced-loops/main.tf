@@ -28,11 +28,18 @@
 #output "instance_publicdns" {
 #  value = [ for key, values in aws_instance.good : key  ]
 #}
+#
+#data "aws_availability_zone" "example" {
+#  name = "us-east-1a"
+#}
+#
+#output "data" {
+#  value = data.aws_availability_zone.example
+#}
+data "aws_availability_zones" "example" {
+  all_availability_zones = true
 
-data "aws_availability_zone" "example" {
-  name = "us-east-1a"
 }
-
 output "data" {
-  value = data.aws_availability_zone.example
+  value = data.aws_availability_zones.example
 }
