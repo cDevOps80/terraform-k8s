@@ -20,7 +20,7 @@ output "final" {
 }
 
 output "instance_publicdns2" {
-  value = {
+  value = tomap({
     for  myec2vm in aws_instance.good : myec2vm.availability_zone => myec2vm.public_dns
-  }
+  })
 }
