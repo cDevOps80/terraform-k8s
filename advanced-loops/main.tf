@@ -9,8 +9,10 @@ resource "aws_instance" "good" {
 }
 
 variable "instance_types" {
-  one = "t2.micro"
-  two = "t2.small"
+  default = {
+    one = "t2.micro"
+    two = "t2.small"
+  }
 }
 
 output "final" {
