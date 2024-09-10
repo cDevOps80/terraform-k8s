@@ -1,13 +1,5 @@
-#resource "aws_instance" "good" {
-#  for_each = var.instance_types
-#  ami           = "ami-0a5c3558529277641"
-#  instance_type = "t2.micro"
-#
-#  tags = {
-#    Name = "test-${each.key}"
-#  }
-#}
-#
+
+
 #variable "instance_types" {
 #  default = {
 #    one = "t2.micro"
@@ -44,4 +36,16 @@ data "aws_availability_zones" "example" {
 }
 output "data" {
    value = data.aws_availability_zones.example.names
+}
+
+
+resource "aws_instance" "good" {
+  for_each = toset(data.aws_availability_zones.example.names)
+  ami           = "ami-0a5c3558529277641"
+  instance_type = "t2.micro"
+  availability_zone = each.value
+
+  tags = {
+    Name = "test-${each.key}"
+  }
 }
