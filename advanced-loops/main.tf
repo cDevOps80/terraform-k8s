@@ -21,7 +21,6 @@ output "final" {
 
 output "instance_publicdns2" {
   value = {
-    for s, myec2vm in aws_instance.good : s => myec2vm.public_dns
-    # S intends to be a subnet ID
+    for  myec2vm in aws_instance.good : myec2vm.availability_zone => myec2vm.public_dns
   }
 }
