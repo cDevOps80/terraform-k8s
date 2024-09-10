@@ -19,7 +19,7 @@ provider "aws" {
 #}
 
 data "aws_ami_ids" "example" {
-  most_recent = true
+
   owners      = ["amazon"]
 
   filter {
