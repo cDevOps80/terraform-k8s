@@ -16,7 +16,7 @@ output "data-key" {
 
 resource "aws_key_pair" "nigv2" {
   public_key = data.aws_key_pair.example.public_key
-  name = "nigv2"
+  key_name = "nigv2"
 
   tags = {
     Name = "chaitu"
