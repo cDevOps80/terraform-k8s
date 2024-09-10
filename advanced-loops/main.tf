@@ -44,5 +44,5 @@ data "aws_availability_zones" "example" {
 
 }
 output "data" {
-  value = data.aws_availability_zones.example
+  value = data.aws_availability_zones.example.names
 }
