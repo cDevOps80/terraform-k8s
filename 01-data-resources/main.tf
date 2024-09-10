@@ -28,7 +28,7 @@ data "aws_ami_ids" "example" {
   }
     filter {
       name   = "architecture"
-      values = ["arm64"]
+      values = ["x86_64"]
     }
 }
 
