@@ -26,5 +26,5 @@ output "instance_publicdns2" {
 }
 
 output "instance_publicdns" {
-  value = [ for key, values in aws_instance.good : values  ]
+  value = [ for key, values in aws_instance.good : key  ]
 }
