@@ -17,5 +17,5 @@ data "aws_ec2_instance_type_offerings" "example" {
 }
 
 output "final" {
-  value = data.aws_ec2_instance_type_offerings.example.*.location_types
+  value = data.aws_ec2_instance_type_offerings.example.*.instance_types
 }
