@@ -2,7 +2,7 @@ variable "av_zones" {
   default = ["us-east-1a","us-east-1b"]
 }
 
-data "aws_ec2_instance_type_offering" "example" {
+data "aws_ec2_instance_type_offerings" "example" {
   count = length(var.av_zones)
   filter {
     name   = "instance-type"
@@ -16,6 +16,6 @@ data "aws_ec2_instance_type_offering" "example" {
   location_type = "availability-zone"
 }
 
-output "finale" {
-  value = data.aws_ec2_instance_type_offering.example.*.instance_type
+output "final" {
+  value = data.aws_ec2_instance_type_offerings.example.*.location_types
 }
