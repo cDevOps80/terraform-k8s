@@ -42,12 +42,12 @@
 #}
 
 
-resource "null_resource" "sample" {
+resource "null_resource" "sample1" {
   provisioner "local-exec" {
     command = "bash run.sh"
   }
 }
 
 output "finale" {
-  value = null_resource.sample
+  value = null_resource.sample1
 }
