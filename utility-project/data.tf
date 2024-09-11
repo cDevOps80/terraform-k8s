@@ -41,13 +41,13 @@
 #  availability_zone = each.key
 #}
 
-
-resource "null_resource" "sample1" {
-  provisioner "local-exec" {
-    command = "bash run.sh"
-  }
-}
-
-output "finale" {
-  value = null_resource.sample1
-}
+#
+#resource "null_resource" "sample1" {
+#  provisioner "local-exec" {
+#    command = "bash run.sh"
+#  }
+#}
+#
+#output "finale" {
+#  value = null_resource.sample1
+#}
