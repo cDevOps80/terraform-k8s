@@ -10,7 +10,7 @@ data "aws_ec2_instance_type_offering" "example" {
   }
   filter {
     name   = "location"
-    values = [var.av_zones[count.index]]
+    values = ["${var.av_zones[count.index]}"]
   }
 
   location_type = "availability-zone"
