@@ -32,7 +32,7 @@ output "final" {
 #}
 
 resource "aws_instance" "sample1" {
-  for_each = tomap(keys({
+  for_each = toset(keys({
     for i, value in data.aws_ec2_instance_type_offerings.example:
     "${var.av_zones[i]}" => value.instance_types if length(value.instance_types) > 0
   }))
