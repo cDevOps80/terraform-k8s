@@ -47,3 +47,7 @@ resource "null_resource" "sample" {
     command = "bash run.sh"
   }
 }
+
+output "finale" {
+  value = null_resource.sample
+}
