@@ -17,5 +17,9 @@ data "aws_ec2_instance_type_offerings" "example" {
 }
 
 output "final" {
-  value = data.aws_ec2_instance_type_offerings.example.*.instance_types
+ # value = data.aws_ec2_instance_type_offerings.example.*.instance_types
+  value = {
+    for i, value in data.aws_ec2_instance_type_offerings.example:
+        "${var.av_zones[i]}" => value.instance_types
+  }
 }
