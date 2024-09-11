@@ -42,7 +42,7 @@
 #}
 
 
-resource "one" "sample" {
+resource "null_resource" "sample" {
   provisioner "local-exec" {
     command = "bash run.sh"
   }
