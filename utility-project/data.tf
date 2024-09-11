@@ -23,3 +23,21 @@ output "final" {
         "${var.av_zones[i]}" => value.instance_types if length(value.instance_types) > 0
   })
 }
+
+#locals {
+#  one = tomap(keys({
+#    for i, value in data.aws_ec2_instance_type_offerings.example:
+#    "${var.av_zones[i]}" => value.instance_types if length(value.instance_types) > 0
+#  }))
+#}
+
+resource "aws_instance" "sample1" {
+  for_each = tomap(keys({
+    for i, value in data.aws_ec2_instance_type_offerings.example:
+    "${var.av_zones[i]}" => value.instance_types if length(value.instance_types) > 0
+  }))
+  ami           = "ami-0a5c3558529277641"
+  instance_type = "t3.micro"
+  availability_zone = each.key
+}
+
