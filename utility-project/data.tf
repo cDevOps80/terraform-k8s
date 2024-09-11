@@ -17,5 +17,5 @@ data "aws_ec2_instance_type_offering" "example" {
 }
 
 output "finale" {
-  value = data.aws_ec2_instance_type_offering.example
+  value = data.aws_ec2_instance_type_offering.example.*.instance_type
 }
