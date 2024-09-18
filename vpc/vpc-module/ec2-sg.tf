@@ -50,7 +50,7 @@ resource "aws_instance" "private-ec2" {
 }
 
 resource "aws_security_group" "baston-sg" {
-  name        = "dev_vpc_sg"
+  name        = "dev-baston-sg"
   description = "Allow TLS inbound traffic and all outbound traffic"
   vpc_id      = aws_vpc.main.id
 
