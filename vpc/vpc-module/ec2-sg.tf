@@ -53,7 +53,7 @@ resource "aws_security_group" "baston-sg" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = [aws_instance.baston-ec2.private_ip]
+    cidr_blocks      = ["aws_instance.baston-ec2.private_ip/32"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
