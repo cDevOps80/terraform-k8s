@@ -9,6 +9,7 @@ resource "aws_instance" "baston-ec2" {
 }
 
 data "aws_instance" "baston" {
+  depends_on = [aws_instance.baston-ec2]
   instance_id = aws_instance.baston-ec2.id
 }
 
