@@ -22,7 +22,7 @@ resource "aws_security_group" "normal-sg" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["${data.aws_instance.baston.private_ip}/32"]
+    cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
@@ -58,7 +58,7 @@ resource "aws_security_group" "baston-sg" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = []
+    cidr_blocks      = ["${data.aws_instance.baston.private_ip}/32"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
