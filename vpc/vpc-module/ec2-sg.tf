@@ -8,6 +8,10 @@ resource "aws_instance" "baston-ec2" {
   }
 }
 
+data "aws_instance" "baston-ec2" {
+  instance_id = aws_instance.baston-ec2.id
+}
+
 resource "aws_security_group" "normal-sg" {
   name        = "dev_vpc_sg"
   description = "Allow TLS inbound traffic and all outbound traffic"
@@ -17,7 +21,7 @@ resource "aws_security_group" "normal-sg" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = ["${data.aws_instance.baston-ec2.private_ip}/32"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
@@ -53,7 +57,7 @@ resource "aws_security_group" "baston-sg" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["aws_instance.baston-ec2.private_ip/32"]
+    cidr_blocks      = []
     ipv6_cidr_blocks = ["::/0"]
   }
 
