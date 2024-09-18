@@ -8,7 +8,7 @@ resource "aws_instance" "baston-ec2" {
   }
 }
 
-data "aws_instance" "baston-ec2" {
+data "aws_instance" "baston" {
   instance_id = aws_instance.baston-ec2.id
 }
 
@@ -21,7 +21,7 @@ resource "aws_security_group" "normal-sg" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["${data.aws_instance.baston-ec2.private_ip}/32"]
+    cidr_blocks      = ["${data.aws_instance.baston.private_ip}/32"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
