@@ -80,7 +80,7 @@ resource "aws_route_table" "private-rt" {
 
   route {
     cidr_block = "0.0.0.0"
-    gateway_id = aws_nat_gateway.example.id
+    nat_gateway_id = aws_nat_gateway.example.id
   }
 
   tags = {
@@ -116,8 +116,8 @@ resource "aws_route_table" "db-rt" {
 
 resource "aws_route_table_association" "db-rt-association" {
   count             = length(var.availability_zones)
-  subnet_id      = aws_subnet.db-subnets[count.index].id
-  route_table_id = aws_route_table.db-rt.id
+  subnet_id         = aws_subnet.db-subnets[count.index].id
+  route_table_id    = aws_route_table.db-rt.id
 }
 
 
