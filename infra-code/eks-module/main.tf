@@ -59,7 +59,7 @@ resource "aws_eks_node_group" "dev-eks-private-nodegroup" {
     aws_iam_role_policy_attachment.node-AmazonEC2ContainerRegistryReadOnly,
   ]
   cluster_name    = aws_eks_cluster.dev-eks.name
-  node_group_name = "dev-eks-public-nodegroup"
+  node_group_name = "dev-eks-private-nodegroup"
   node_role_arn   = aws_iam_role.node_role.arn
   subnet_ids      = var.private_subnets
   capacity_type   = "SPOT"
