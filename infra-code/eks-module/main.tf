@@ -52,6 +52,7 @@ resource "aws_eks_node_group" "dev-eks-public-nodegroup" {
 }
 
 # private-node
+/*
 resource "aws_eks_node_group" "dev-eks-private-nodegroup" {
   depends_on = [
     aws_iam_role_policy_attachment.node-AmazonEKSWorkerNodePolicy,
@@ -85,7 +86,7 @@ resource "aws_eks_node_group" "dev-eks-private-nodegroup" {
   }
 
 }
-
+*/
 
 #
 resource "aws_eks_addon" "vpc-cni" {
