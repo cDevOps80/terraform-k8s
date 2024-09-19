@@ -13,7 +13,7 @@ resource "aws_eks_cluster" "dev-eks" {
   }
 
   kubernetes_network_config {
-    service_ipv4_cidr = "10.0.0.0/8"
+    service_ipv4_cidr = "10.0.0.0/16"
   }
 }
 
