@@ -65,14 +65,15 @@ resource "aws_eks_node_group" "dev-eks-private-nodegroup" {
   capacity_type   = "SPOT"
   instance_types  = ["t3.small"]
 
-  update_config {
-    max_unavailable = 1
-  }
 
   scaling_config {
     desired_size = 1
     max_size     = 2
     min_size     = 1
+  }
+
+  update_config {
+    max_unavailable = 1
   }
 
   remote_access {
@@ -84,3 +85,5 @@ resource "aws_eks_node_group" "dev-eks-private-nodegroup" {
   }
 
 }
+
+#
