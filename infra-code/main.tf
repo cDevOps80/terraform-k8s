@@ -8,6 +8,8 @@ module "dev-vpc" {
 }
 
 module "eks" {
+  depends_on = [module.dev-vpc]
+
   source = "./eks-module"
   public_subnets = module.dev-vpc.public_subnets
   private_subnets = module.dev-vpc.private_subnets
