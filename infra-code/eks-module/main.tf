@@ -94,11 +94,11 @@ resource "aws_eks_addon" "vpc-cni" {
   addon_name                  = "vpc-cni"
   addon_version               = "v1.18.3-eksbuild.3"
   #e.g., previous version v1.9.3-eksbuild.3 and the new version is v1.10.1-eksbuild.1
-  #resolve_conflicts_on_update = "PRESERVE"
+  resolve_conflicts_on_update = "OVERWRITE"
   resolve_conflicts_on_create = "OVERWRITE"
 
-  configuration_values = jsonencode(
-    { "enableNetworkPolicy" : "true" }
-  )
+  configuration_values = jsonencode({
+    "enableNetworkPolicy" : "true"
+  })
 
 }
