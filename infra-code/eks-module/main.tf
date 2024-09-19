@@ -63,7 +63,7 @@ resource "aws_eks_node_group" "dev-eks-private-nodegroup" {
   node_role_arn   = aws_iam_role.node_role.arn
   subnet_ids      = var.private_subnets
   capacity_type   = "SPOT"
-  instance_types  = "t3.small"
+  instance_types  = ["t3.small"]
 
   update_config {
     max_unavailable = 1
