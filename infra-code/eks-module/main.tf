@@ -86,4 +86,3 @@ resource "aws_eks_node_group" "dev-eks-private-nodegroup" {
 
 }
 
-#
