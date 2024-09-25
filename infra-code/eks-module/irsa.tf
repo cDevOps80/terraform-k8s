@@ -42,19 +42,5 @@ resource "aws_iam_role" "eks-cluster-autoscale" {
 
 resource "aws_iam_role_policy_attachment" "irsa_iam_role_policy_attach" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
-  role       = aws_iam_role.node_role.name
-}
-
-locals {
-  eks_client_id = element(tolist(split("/", tostring(aws_eks_cluster.dev-eks.identity[0].oidc[0].issuer))), 4)
-}
-
-resource "aws_eks_identity_provider_config" "nun" {
-  cluster_name = aws_eks_cluster.dev-eks.name
-
-  oidc {
-    client_id                     = local.eks_client_id
-    identity_provider_config_name = "iam-oidc"
-    issuer_url                    = aws_eks_cluster.dev-eks.identity[0].oidc[0].issuer
-  }
+  role       = aws_iam_role.eks-cluster-autoscale.name
 }
