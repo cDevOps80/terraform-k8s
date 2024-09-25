@@ -89,6 +89,8 @@ resource "aws_eks_node_group" "dev-eks-private-nodegroup" {
 */
 
 #
+
+/*
 resource "aws_eks_addon" "vpc-cni" {
   cluster_name                = aws_eks_cluster.dev-eks.name
   addon_name                  = "vpc-cni"
@@ -102,3 +104,4 @@ resource "aws_eks_addon" "vpc-cni" {
   })
 
 }
+*/
