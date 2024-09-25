@@ -49,7 +49,7 @@ locals {
   eks_client_id = element(tolist(split("/", tostring(aws_eks_cluster.dev-eks.identity[0].oidc[0].issuer))), 4)
 }
 
-resource "aws_eks_identity_provider_config" "example" {
+resource "aws_eks_identity_provider_config" "nun" {
   cluster_name = aws_eks_cluster.dev-eks.name
 
   oidc {
