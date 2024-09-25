@@ -29,6 +29,7 @@ resource "aws_iam_role" "eks-cluster-autoscale" {
           "StringEquals" : {
             "${local.oidc_provider_name_extract_arn}:aud" : "sts.amazonaws.com",
             "${local.oidc_provider_name_extract_arn}:sub" : "system:serviceaccount:dafault:dev-sa"
+            "${local.oidc_provider_name_extract_arn}:sub" : "system:serviceaccount:dev:dev-sa"
           }
         }
       }
