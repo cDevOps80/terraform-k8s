@@ -44,3 +44,13 @@ resource "aws_iam_role_policy_attachment" "irsa_iam_role_policy_attach" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
   role       = aws_iam_role.node_role.name
 }
+
+resource "aws_eks_identity_provider_config" "example" {
+  cluster_name = aws_eks_cluster.dev-eks.name
+
+  oidc {
+    client_id                     = "447FD3C068797DF0BF3FA78A0E659F28"
+    identity_provider_config_name = "example"
+    issuer_url                    = aws_eks_cluster.dev-eks.identity[0].oidc[0].issuer
+  }
+}
