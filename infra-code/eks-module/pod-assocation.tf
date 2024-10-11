@@ -265,7 +265,7 @@ resource "aws_iam_role_policy_attachment" "example_s3" {
   role       = aws_iam_role.example.name
 }
 
-resource "aws_eks_pod_identity_association" "example" {
+resource "aws_eks_pod_identity_association" "eks-pod" {
   cluster_name    = aws_eks_cluster.dev-eks.name
   namespace       = "kube-system"
   service_account = "aws-load-balancer-controller"
