@@ -254,7 +254,27 @@ resource "aws_iam_policy" "alb_policy" {
           "elasticloadbalancing:ModifyRule"
         ],
         "Resource": "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "elasticloadbalancing:CreateTargetGroup"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "elasticloadbalancing:AddTags"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "elasticloadbalancing:CreateAction" : "CreateTargetGroup"
+          }
+        }
       }
+
     ]
   })
 }
