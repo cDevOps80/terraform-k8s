@@ -316,18 +316,19 @@ resource "aws_iam_role" "route_role" {
   name = "route_eks_role"
 
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        actions = [
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : [
+            "pods.eks.amazonaws.com"
+          ]
+        },
+        "Action" : [
           "sts:AssumeRole",
           "sts:TagSession"
         ]
-        Effect    = "Allow"
-        principals =  {
-          type        = "Service"
-          identifiers = ["pods.eks.amazonaws.com"]
-        }
       }
     ]
   })
