@@ -313,7 +313,7 @@ resource "aws_iam_role_policy_attachment" "example_s3" {
 #}
 
 resource "aws_iam_role" "route_role" {
-  name = "route53_eks_role1"
+  name = "route_eks_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
