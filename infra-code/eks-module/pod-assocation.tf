@@ -312,10 +312,8 @@ resource "aws_iam_role_policy_attachment" "example_s3" {
 #  role_arn        = aws_iam_role.example.arn
 #}
 
-// Route-53
-
-resource "aws_iam_role" "route53_role" {
-  name = "route53_eks_role"
+resource "aws_iam_role" "route_role" {
+  name = "route53_eks_role1"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -377,6 +375,6 @@ resource "aws_eks_pod_identity_association" "route53-pod-assocation" {
   cluster_name    = aws_eks_cluster.dev-eks.name
   namespace       = "external-ns"
   service_account = "name-dns"
-  role_arn        = aws_iam_role.route53_role.arn
+  role_arn        = aws_iam_role.route_role.arn
 }
 
