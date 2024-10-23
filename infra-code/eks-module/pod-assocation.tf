@@ -369,11 +369,14 @@ resource "aws_iam_role" "route53_role" {
   }
 }
 
-#resource "aws_eks_pod_identity_association" "route53-pod-assocation" {
-#  depends_on     = [aws_eks_addon.vpc-cni]
-#  cluster_name    = aws_eks_cluster.dev-eks.name
-#  namespace       = "kube-system"
-#  service_account = ""
-#  role_arn        = aws_iam_role.route53_role.arn
-#}
+resource "aws_eks_pod_identity_association" "route53-pod-assocation" {
+  depends_on     = [
+    aws_eks_addon.eks-pod-identity-agent,
+    helm_release.external-dns
+  ]
+  cluster_name    = aws_eks_cluster.dev-eks.name
+  namespace       = "external-ns"
+  service_account = "name-dns"
+  role_arn        = aws_iam_role.route53_role.arn
+}
 
