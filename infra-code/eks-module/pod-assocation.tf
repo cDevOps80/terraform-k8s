@@ -303,9 +303,77 @@ resource "aws_iam_role_policy_attachment" "example_s3" {
   role       = aws_iam_role.example.name
 }
 
-resource "aws_eks_pod_identity_association" "eks-pod" {
-  cluster_name    = aws_eks_cluster.dev-eks.name
-  namespace       = "kube-system"
-  service_account = "aws-load-balancer-controller"
-  role_arn        = aws_iam_role.example.arn
+
+#resource "aws_eks_pod_identity_association" "eks-pod" {
+#  depends_on     = [aws_eks_addon.vpc-cni]
+#  cluster_name    = aws_eks_cluster.dev-eks.name
+#  namespace       = "kube-system"
+#  service_account = "aws-load-balancer-controller"
+#  role_arn        = aws_iam_role.example.arn
+#}
+
+// Route-53
+
+resource "aws_iam_role" "route53_role" {
+  name = "route53_eks_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        actions = [
+          "sts:AssumeRole",
+          "sts:TagSession"
+        ]
+        Effect    = "Allow"
+        principals =  {
+          type        = "Service"
+          identifiers = ["pods.eks.amazonaws.com"]
+        }
+      }
+    ]
+  })
+
+  inline_policy {
+    name = "my_inline_policy"
+
+    policy = jsonencode({
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "route53:ChangeResourceRecordSets"
+          ],
+          "Resource": [
+            "arn:aws:route53:::hostedzone/*"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "route53:ListHostedZones",
+            "route53:ListResourceRecordSets",
+            "route53:ListTagsForResource"
+          ],
+          "Resource": [
+            "*"
+          ]
+        }
+      ]
+    })
+  }
+
+  tags = {
+    tag-key = "route53_eks_role"
+  }
 }
+
+#resource "aws_eks_pod_identity_association" "route53-pod-assocation" {
+#  depends_on     = [aws_eks_addon.vpc-cni]
+#  cluster_name    = aws_eks_cluster.dev-eks.name
+#  namespace       = "kube-system"
+#  service_account = ""
+#  role_arn        = aws_iam_role.route53_role.arn
+#}
+

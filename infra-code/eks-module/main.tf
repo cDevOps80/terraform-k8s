@@ -50,6 +50,16 @@ resource "aws_eks_node_group" "dev-eks-public-nodegroup" {
     Name = "dev-eks-public-nodegroup"
   }
 }
+resource "aws_eks_addon" "vpc-cni" {
+  cluster_name                = aws_eks_cluster.dev-eks.name
+  addon_name                  = "eks-pod-identity-agent"
+  addon_version               = "v1.18.5-eksbuild.1"
+  resolve_conflicts_on_update = "OVERWRITE"
+  resolve_conflicts_on_create = "OVERWRITE"
+}
+
+
+
 
 # private-node
 /*
