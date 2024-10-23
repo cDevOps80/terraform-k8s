@@ -304,13 +304,12 @@ resource "aws_iam_role_policy_attachment" "example_s3" {
 }
 
 
-#resource "aws_eks_pod_identity_association" "eks-pod" {
-#  depends_on     = [aws_eks_addon.vpc-cni]
-#  cluster_name    = aws_eks_cluster.dev-eks.name
-#  namespace       = "kube-system"
-#  service_account = "aws-load-balancer-controller"
-#  role_arn        = aws_iam_role.example.arn
-#}
+resource "aws_eks_pod_identity_association" "eks-alb-assocation" {
+  cluster_name    = aws_eks_cluster.dev-eks.name
+  namespace       = "kube-system"
+  service_account = "aws-load-balancer-controller"
+  role_arn        = aws_iam_role.example.arn
+}
 
 resource "aws_iam_role" "route_role" {
   name = "route_eks_role"
