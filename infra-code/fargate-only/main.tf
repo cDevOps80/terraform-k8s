@@ -31,17 +31,17 @@ resource "aws_eks_fargate_profile" "kube-system" {
 
 // TO create fargate-profile for another namespace
 resource "null_resource" "kube-config" {
-  depends_on = [aws_eks_cluster.dev-eks]
+ // depends_on = [aws_eks_cluster.dev-eks]
   provisioner "local-exec" {
     command = "aws eks update-kubeconfig --region us-east-1 --name ${aws_eks_cluster.dev-eks.name}"
   }
 }
 
-resource "kubernetes_namespace" "example" {
-  metadata {
-    name = "dev-ns"
-  }
-}
+#resource "kubernetes_namespace" "example" {
+#  metadata {
+#    name = "dev-ns"
+#  }
+#}
 
 resource "aws_eks_fargate_profile" "dev-ns" {
   cluster_name           = aws_eks_cluster.dev-eks.name
@@ -51,5 +51,8 @@ resource "aws_eks_fargate_profile" "dev-ns" {
 
   selector {
     namespace = "dev-ns"
+    labels = {
+      app = "chaitu1"
+    }
   }
 }
