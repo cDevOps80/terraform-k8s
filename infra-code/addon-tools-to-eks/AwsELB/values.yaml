@@ -5,3 +5,5 @@ serviceAccount:
   create: true
   name: aws-load-balancer-controller
 createIngressClassResource: false
+region: us-east-1
+vpcId: vpc-0489d15b6f59866d3
