@@ -1,0 +1,7 @@
+image:
+  repository: 602401143452.dkr.ecr.us-east-1.amazonaws.com
+clusterName: dev-eks
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+createIngressClassResource: false
