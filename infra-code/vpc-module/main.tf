@@ -31,7 +31,7 @@ resource "aws_nat_gateway" "example" {
 
 # public-subnets
 resource "aws_subnet" "public-subnets" {
-  count             = length(var.availability_zones)
+  count             = length(var.public_cidr_blocks)
   vpc_id            = aws_vpc.main.id
   cidr_block        = element(var.public_cidr_blocks,count.index)
   availability_zone = element(var.availability_zones,count.index)
@@ -56,7 +56,7 @@ resource "aws_route_table" "public-rt" {
 }
 
 resource "aws_route_table_association" "public-rt-association" {
-  count             = length(var.availability_zones)
+  count             = length(aws_subnet.public-subnets)
   subnet_id         = aws_subnet.public-subnets[count.index].id
   route_table_id    = aws_route_table.public-rt.id
 }
@@ -66,7 +66,7 @@ resource "aws_route_table_association" "public-rt-association" {
 
 # Private-subnets
 resource "aws_subnet" "private-subnets" {
-  count             = length(var.availability_zones)
+  count             = length(var.private_cidr_blocks)
   vpc_id            = aws_vpc.main.id
   cidr_block        = element(var.private_cidr_blocks,count.index)
   availability_zone = element(var.availability_zones,count.index)
@@ -89,7 +89,7 @@ resource "aws_route_table" "private-rt" {
 }
 
 resource "aws_route_table_association" "private-rt-association" {
-  count             = length(var.availability_zones)
+  count             = length(aws_subnet.private-subnets)
   subnet_id      = aws_subnet.private-subnets[count.index].id
   route_table_id = aws_route_table.private-rt.id
 }
@@ -97,7 +97,7 @@ resource "aws_route_table_association" "private-rt-association" {
 
 # db
 resource "aws_subnet" "db-subnets" {
-  count             = length(var.availability_zones)
+  count             = length(var.db_cidr_blocks)
   vpc_id            = aws_vpc.main.id
   cidr_block        = element(var.db_cidr_blocks,count.index)
   availability_zone = element(var.availability_zones,count.index)
@@ -109,13 +109,17 @@ resource "aws_subnet" "db-subnets" {
 
 resource "aws_route_table" "db-rt" {
   vpc_id = aws_vpc.main.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.example.id
+  }
   tags = {
     Name = "db-rt"
   }
 }
 
 resource "aws_route_table_association" "db-rt-association" {
-  count             = length(var.availability_zones)
+  count             = length(aws_subnet.db-subnets)
   subnet_id         = aws_subnet.db-subnets[count.index].id
   route_table_id    = aws_route_table.db-rt.id
 }

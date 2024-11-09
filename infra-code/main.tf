@@ -7,18 +7,18 @@ module "dev-vpc" {
   db_cidr_blocks       = ["10.0.5.0/24","10.0.6.0/24"]
 }
 
-#module "eks" {
-#  depends_on = [module.dev-vpc]
-#
-#  source = "./eks-module"
-#  public_subnets = module.dev-vpc.public_subnets
-#  private_subnets = module.dev-vpc.private_subnets
-#}
+module "eks" {
+  depends_on = [module.dev-vpc]
 
-
-module "eck-fargate" {
-  source = "./fargate-only"
+  source = "./eks-module"
   public_subnets = module.dev-vpc.public_subnets
   private_subnets = module.dev-vpc.private_subnets
 }
+
+
+#module "eck-fargate" {
+#  source = "./fargate-only"
+#  public_subnets = module.dev-vpc.public_subnets
+#  private_subnets = module.dev-vpc.private_subnets
+#}
 
