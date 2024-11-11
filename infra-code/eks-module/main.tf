@@ -52,6 +52,7 @@ resource "aws_eks_node_group" "dev-eks-public-nodegroup" {
 }
 
 resource "aws_eks_addon" "eks-pod-identity-agent" {
+  depends_on = [aws_eks_node_group.dev-eks-public-nodegroup]
   cluster_name                = aws_eks_cluster.dev-eks.name
   addon_name                  = "eks-pod-identity-agent"
   addon_version               = "v1.3.2-eksbuild.2"
