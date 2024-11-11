@@ -1,3 +1,31 @@
+resource "null_resource" "kubectl-config" {
+  depends_on = [aws_eks_node_group.dev-eks-public-nodegroup]
+
+  provisioner "local-exec" {
+    command = <<EOF
+aws eks update-kubeconfig --region us-east-1 --name dev-eks
+sleep 20
+EOF
+  }
+}
+
+
+resource "helm_release" "aws-elb" {
+  depends_on = [null_resource.kubectl-config,aws_eks_pod_identity_association.eks-alb-assocation]
+
+  name       = "aws-elb"
+  repository = "https://aws.github.io/eks-charts"
+  chart      = "aws-load-balancer-controller"
+  namespace  = "kube-system"
+
+  values = [
+    "${templatefile("./elb-values.yaml",{
+vpc_id = var.vpc_id
+})}"
+  ]
+}
+
+
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"

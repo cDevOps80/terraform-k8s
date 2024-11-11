@@ -1,0 +1,7 @@
+clusterName: dev-eks
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+createIngressClassResource: false
+region: us-east-1
+vpcId: ${vpc_id}

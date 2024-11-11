@@ -11,8 +11,10 @@ module "eks" {
   depends_on = [module.dev-vpc]
 
   source = "./eks-module"
+  vpc_id = module.dev-vpc.vpc_id
   public_subnets = module.dev-vpc.public_subnets
   private_subnets = module.dev-vpc.private_subnets
+
 }
 
 
