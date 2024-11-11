@@ -19,7 +19,7 @@ resource "helm_release" "aws-elb" {
   namespace  = "kube-system"
 
   values = [
-    "${templatefile("./elb-values.yaml",{
+    "${templatefile("${path,module}/elb-values.yaml",{
 vpc_id = var.vpc_id
 })}"
   ]
