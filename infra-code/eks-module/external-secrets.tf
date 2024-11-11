@@ -7,3 +7,11 @@ resource "helm_release" "external-secrets" {
   namespace         = "external-secrets"
   create_namespace  = true
 }
+
+resource "null_resource" "css" {
+  provisioner "local-exec" {
+    command = <<EOT
+kubectl apply -f "${path.module}"/css.yaml
+EOT
+  }
+}
