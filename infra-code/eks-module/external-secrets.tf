@@ -20,5 +20,5 @@ EOT
 }
 
 variable "trigger" {
-  default = "change1"
+  default = "change2"
 }
