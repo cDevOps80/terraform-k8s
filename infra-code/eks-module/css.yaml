@@ -13,11 +13,12 @@ metadata:
 spec:
   provider:
     vault:
-      server: "http://184.73.146.206:8200/"
+      server: "http://172.31.89.244:8200/"
       path: "roboshop-dev"
       version: "v2"
       auth:
         tokenSecretRef:
           name: "vault-token"
           key: "token"
+          namespace: external-secrets
 

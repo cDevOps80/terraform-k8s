@@ -9,9 +9,16 @@ resource "helm_release" "external-secrets" {
 }
 
 resource "null_resource" "css" {
+  triggers = {
+    time = var.trigger
+  }
   provisioner "local-exec" {
     command = <<EOT
 kubectl apply -f "${path.module}"/css.yaml
 EOT
   }
+}
+
+variable "trigger" {
+  name = "change1"
 }
