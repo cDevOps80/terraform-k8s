@@ -34,7 +34,6 @@ resource "null_resource" "ing-class" {
   }
   provisioner "local-exec" {
     command = <<EOT
-sleep 20
 kubectl apply -f "${path.module}"/ingclass.yaml
 EOT
   }
