@@ -14,7 +14,7 @@ metadata:
 spec:
   provider:
     vault:
-      server: "http://184.73.146.206:8200"
+      server: "http://44.204.240.222:8200/"
       path: "roboshop-dev"
       version: "v2"
       auth:
