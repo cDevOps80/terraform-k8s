@@ -26,6 +26,20 @@ vpc_id = var.vpc_id
 }
 
 
+resource "null_resource" "ing-class" {
+  depends_on = [null_resource.kubectl-config]
+
+  triggers = {
+    time = var.trigger
+  }
+  provisioner "local-exec" {
+    command = <<EOT
+sleep 20
+kubectl apply -f "${path.module}"/ingclass.yaml
+EOT
+  }
+}
+
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"
