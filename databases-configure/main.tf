@@ -1,9 +1,16 @@
-
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.54.1"
+    }
+  }
+}
 resource "aws_instance" "databases" {
   ami           = "ami-0a5c3558529277641"
   instance_type = "t3.small"
   vpc_security_group_ids = [aws_security_group.db-sg.id]
-  subnet_id              = var.subnet_id
+  # subnet_id              = var.subnet_id
   user_data = templatefile("./user.sh",{
     MYSQL_ROOT_PASSWORD   = "RoboShop@1"
     RABBITMQ_DEFAULT_USER = "roboshop"
@@ -22,6 +29,14 @@ resource "aws_instance" "databases" {
   tags = {
     Name = "roboshop-db"
   }
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = "Z0144525QEQQSOE8RRNR"
+  name    = "database.azcart.online"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.databases.public_ip]
 }
 
 variable "ports" {
@@ -50,7 +65,7 @@ variable "ports" {
 resource "aws_security_group" "db-sg" {
   name        = "allow_databases"
   description = "Allow TLS inbound traffic "
-  vpc_id      = var.vpc_id
+  # vpc_id      = var.vpc_id
 
   dynamic "ingress" {
     for_each = var.ports
@@ -89,9 +104,9 @@ output "content" {
 
 */
 
-variable "vpc_id" {
-  default = "vpc-07e77475583043f30"
-}
-variable "subnet_id" {
-  default = "subnet-067a0f05c17634c96"
-}
+# variable "vpc_id" {
+#   default = "vpc-07e77475583043f30"
+# }
+# variable "subnet_id" {
+#   default = "subnet-067a0f05c17634c96"
+# }
