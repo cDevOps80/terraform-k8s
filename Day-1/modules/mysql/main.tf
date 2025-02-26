@@ -15,6 +15,6 @@ resource "null_resource" "mysql" {
     date = timestamp()
   }
 provisioner "local-exec" {
-  command = "echo this is mysql - ${data.terraform_remote_state.ec2.outputs.ec2_module1}"
+  command = "echo this is mysql -- ${data.terraform_remote_state.ec2.outputs.name}"
 }
 }
