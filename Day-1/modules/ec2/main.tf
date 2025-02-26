@@ -17,7 +17,7 @@ resource "null_resource" "main" {
 }
 
 output "ec2_module1" {
-  value = "ec2_module2"
+  value = "chaitu"
 }
 
 output "ec2_module2" {
