@@ -25,3 +25,7 @@ output "ec2_module1" {
 output "ec2_module2" {
   value = "ec2_module2"
 }
+
+output "name" {
+  value = "hello-name"
+}
