@@ -1,8 +1,10 @@
-terraform {
-  backend "s3" {
-    region = "us-east-1"
+
+data "terraform_remote_state" "ec2" {
+  backend = "s3"
+  config = {
     bucket = "chaituample"
-    key = "dev/mysql"
+    key    = "dev/ec2"
+    region = "us-east-1"
   }
 }
 
@@ -10,6 +12,6 @@ terraform {
 
 resource "null_resource" "mysql" {
 provisioner "local-exec" {
-  command = "echo this is mysql"
+  command = "echo this is mysql - ${data.terraform_remote_state.ec2.outputs.ec2_module1}"
 }
 }
