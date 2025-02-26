@@ -10,7 +10,9 @@ terraform {
 
 
 resource "null_resource" "main" {
-
+  triggers = {
+    date = timestamp()
+  }
   provisioner "local-exec" {
     command = "echo this is provisioner-1"
   }
